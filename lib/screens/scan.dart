@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io' show Platform;
+
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:get/get.dart';
+import 'package:qr_code_student_attendance_app/screens/dashboard.dart';
 
 class Scan extends StatefulWidget {
   const Scan({Key? key}) : super(key: key);
@@ -45,12 +49,18 @@ class _ScanState extends State<Scan> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Barcode Scanner Example'),
+          leading: IconButton(
+              onPressed: () {
+                Get.to(() => const Dashboard());
+              },
+              icon: const Icon(Icons.arrow_back_ios_outlined)),
+          title: const Text('S c a n'),
+          centerTitle: true,
           actions: [
             IconButton(
               icon: const Icon(Icons.camera),
               tooltip: 'Scan',
-              onPressed: _scan,
+              onPressed: _enableContiniousScan,
             )
           ],
         ),
@@ -225,6 +235,13 @@ class _ScanState extends State<Scan> {
     );
   }
 
+  void _enableContiniousScan() async {
+    int count = 1;
+    for (int x = 0; x <= count; x++) {
+      await _scan();
+    }
+  }
+
   Future<void> _scan() async {
     try {
       final result = await BarcodeScanner.scan(
@@ -243,7 +260,9 @@ class _ScanState extends State<Scan> {
           ),
         ),
       );
+
       setState(() => scanResult = result);
+      print(jsonDecode(scanResult!.rawContent));
     } on PlatformException catch (e) {
       setState(() {
         scanResult = ScanResult(
