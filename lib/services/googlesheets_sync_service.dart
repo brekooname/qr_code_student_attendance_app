@@ -30,7 +30,7 @@ class SyncService {
       _userSheet = await _getWorkSheet(spreadsheet, name: 'Default');
       _userSheet!.values.insertRow(1, firstRow);
     } catch (e) {
-      print(e);
+      //print(e);
       rethrow;
     }
   }

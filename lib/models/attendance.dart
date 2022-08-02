@@ -1,21 +1,15 @@
-class Attendance {
-  Attendance(
-      {required this.id,
-      required this.name,
-      required this.studClass,
-      required this.date});
+import 'package:hive/hive.dart';
 
-  int id;
-  String name;
-  String studClass;
-  String date;
+part 'attendance.g.dart';
 
-  Attendance.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        name = json['name'],
-        studClass = json['class'],
-        date = DateTime.now().toIso8601String();
-
-  Map<String, dynamic> toJson() =>
-      {'id': id, 'name': name, 'class': studClass, 'date': date};
+@HiveType(typeId: 0)
+class Attendance extends HiveObject {
+  @HiveField(0)
+  late int id;
+  @HiveField(1)
+  late String name;
+  @HiveField(2)
+  late String studClass;
+  @HiveField(3)
+  late DateTime scannedDate;
 }

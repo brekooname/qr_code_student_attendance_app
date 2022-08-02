@@ -68,7 +68,7 @@ class Dashboard extends StatelessWidget {
                     },
                     child: buildListTile(
                       leading: const Icon(Icons.qr_code),
-                      title: const Text('QR Code info'),
+                      title: const Text('V i e w  Info'),
                     ),
                   ),
                   const Divider(

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:barcode_scan2/barcode_scan2.dart';
@@ -262,7 +261,7 @@ class _ScanState extends State<Scan> {
       );
 
       setState(() => scanResult = result);
-      print(jsonDecode(scanResult!.rawContent));
+      //print(jsonDecode(scanResult!.rawContent));
     } on PlatformException catch (e) {
       setState(() {
         scanResult = ScanResult(
