@@ -62,7 +62,8 @@ class _ScanState extends State<Scan> {
             IconButton(
               icon: const Icon(Icons.camera),
               tooltip: 'Scan',
-              onPressed: _enableContiniousScan,
+              onPressed: _scan,
+
             )
           ],
         ),
@@ -237,12 +238,12 @@ class _ScanState extends State<Scan> {
     );
   }
 
-  void _enableContiniousScan() async {
-    int count = 1;
-    for (int x = 0; x <= count; x++) {
-      await _scan();
-    }
-  }
+  // void _enableContiniousScan() async {
+  //   int count = 1;
+  //   for (int x = 0; x <= count; x++) {
+  //     await _scan();
+  //   }
+  // }
 
   Future<void> _scan() async {
     try {
@@ -270,7 +271,7 @@ class _ScanState extends State<Scan> {
         DatabaseService.colIndexNumber: jsonDecode(scanResult!.rawContent)['indexNumber'],
         DatabaseService.colName: jsonDecode(scanResult!.rawContent)['name'],
         DatabaseService.colClass: jsonDecode(scanResult!.rawContent)['class'],
-        DatabaseService.colDateTime:DateTime.now().toString()
+        DatabaseService.colDateTime:getDate()
       });
 
       print('The inserted id is $i');
@@ -286,5 +287,10 @@ class _ScanState extends State<Scan> {
         );
       });
     }
+  }
+  String getDate(){
+    String date = DateTime.now().year.toString() +'-'+ DateTime.now().month.toString() +'-'+ DateTime.now().day.toString();
+    String time = DateTime.now().hour.toString() +':'+ DateTime.now().minute.toString() +':'+ DateTime.now().second.toString();
+    return '$date $time';
   }
 }

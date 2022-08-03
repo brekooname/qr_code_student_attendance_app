@@ -4,6 +4,7 @@ import 'package:qr_code_student_attendance_app/screens/delete_attendee.dart';
 import 'package:qr_code_student_attendance_app/screens/info_page.dart';
 import 'package:qr_code_student_attendance_app/screens/scan.dart';
 import 'package:qr_code_student_attendance_app/screens/sync_data.dart';
+import 'package:qr_code_student_attendance_app/services/database_service.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -13,13 +14,65 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  late Future<List<Map<String, dynamic>>> _getAttendees;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    _getAttendees =  DatabaseService.instance.queryAll();
+  }
+  @override
+  Widget build(BuildContext context){
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Network Status'),
+        title: Text('Attendees'),
       ),
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+        future: _getAttendees,
+        builder: (
+            BuildContext context,
+            AsyncSnapshot<List<Map<String, dynamic>>> snapshot,
+            ) {
+          print(snapshot.connectionState);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Column(
+                  children: <Widget>[
+                    const Icon(Icons.error, size: 50.0, color: Colors.red,),
+                    const Text('Oops! an error occurred'),
+                  ],
+                ),
+              );
+            } else if (snapshot.hasData) {
+              return ListView.builder(itemBuilder: (context, item){
+                return ListTile(
+                  minLeadingWidth: 1.0,
+                  leading: const Icon(Icons.person),
+                  title: Text(snapshot.data![item].values.elementAt(1) + '  (' + snapshot.data![item].values.elementAt(4) + ')', style: TextStyle(fontSize: 12.0),),
+                  subtitle: Text(snapshot.data![item].values.elementAt(2) + '  (' + snapshot.data![item].values.elementAt(3) + ')' , style: TextStyle(fontSize: 12.0),),
+                  trailing: Text(snapshot.data![item].values.elementAt(0).toString()),
+                );
+              },
+                itemCount: snapshot.data!.length,
+              );
+                //Text(snapshot.data![1].values.toString());
+            } else {
+              return Center(child: Column(
+                children: <Widget>[
+                  const Icon(Icons.no_accounts_rounded),
+                  const Text('No Attendees'),
+                ],
+              ));
+            }
+          } else {
+            return Text('State: ${snapshot.connectionState}');
+          }
+        },
+      ) ,
       drawer: SafeArea(
         child: Drawer(
           width: 200.0,

@@ -27,7 +27,7 @@ class SyncService {
       final firstRow = AttendanceFields.getFields;
 
       final spreadsheet = await _gsheets.spreadsheet(_sheetId);
-      _userSheet = await _getWorkSheet(spreadsheet, name: 'Default');
+      _userSheet = await _getWorkSheet(spreadsheet, name: 'Attendance');
       _userSheet!.values.insertRow(1, firstRow);
     } catch (e) {
       //print(e);
