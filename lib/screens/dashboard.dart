@@ -1,102 +1,115 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:qr_code_student_attendance_app/screens/delete_attendee.dart';
+import 'package:qr_code_student_attendance_app/screens/info_page.dart';
 import 'package:qr_code_student_attendance_app/screens/scan.dart';
 import 'package:qr_code_student_attendance_app/screens/sync_data.dart';
-import 'package:qr_code_student_attendance_app/screens/view_data.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: const <Widget>[
-            Text('Network Status: '),
-            //TODO: Show network status graphically here
-            Icon(Icons.wifi_off_rounded),
-          ],
-        ),
+        centerTitle: true,
+        title: Text('Network Status'),
       ),
       drawer: Drawer(
-        width: 220.0,
-        child: Column(
+        width: 200.0,
+        child: ListView(
           children: <Widget>[
-            Container(
-              height: 200.0,
-              color: Colors.lightBlue,
-              child: Center(
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              //decoration: BoxDecoration(
+                  //gradient:
+                      //LinearGradient(colors: [Colors.blue, Colors.white])),
+              child: Container(
                 child: Column(
-                  children: const <Widget>[
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                  children: <Widget>[
                     Icon(
                       Icons.qr_code_scanner_outlined,
+                      size: 100.0,
                       color: Colors.white,
-                      size: 150.0,
                     ),
-                    Text(
-                      'Q u i c k      A t t e n d a n c e',
-                      style: TextStyle(color: Colors.white),
-                    )
+                    Text('Q u i c k   A t t e n d a n c e', style: TextStyle(color: Colors.white),),
                   ],
                 ),
               ),
             ),
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Get.to(const Scan());
-                    },
-                    child: buildListTile(
-                      leading: const Icon(Icons.qr_code_scanner_outlined),
-                      title: const Text('Scan'),
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 1.0,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(const SyncData());
-                    },
-                    child: buildListTile(
-                      leading: const Icon(Icons.sync_outlined),
-                      title: const Text('Sync Data'),
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 1.0,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(const ViewData());
-                    },
-                    child: buildListTile(
-                      leading: const Icon(Icons.insert_drive_file_outlined),
-                      title: const Text('View Data'),
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 1.0,
-                  ),
-                ],
+
+             Container(
+               height: 40.0,
+               child: Padding(
+                 padding: const EdgeInsets.only(bottom: 15.0),
+                 child: InkWell(
+                   splashColor: Colors.blue,
+                   child: ListTile(
+                     horizontalTitleGap: 2.0,
+                     title: Text('Scan'),
+                     leading: Icon(Icons.qr_code_scanner),
+                     onTap: (){Get.to(const Scan());},
+                     trailing: Icon(Icons.arrow_right),
+                   ),
+                 ),
+               ),
+             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+              child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
+            ),
+            Container(
+              height: 40.0,
+              child: ListTile(
+                horizontalTitleGap: 2.0,
+                title: Text('Sync'),
+                leading: Icon(Icons.sync_outlined),
+                onTap: (){Get.to(const SyncData());},
+                trailing: Icon(Icons.arrow_right),
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+              child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
+            ),
+            Container(
+              height: 40.0,
+              child: ListTile(
+                horizontalTitleGap: 2.0,
+                title: Text('Delete'),
+                leading: Icon(Icons.delete_forever),
+                onTap: (){Get.to(const DeleteAttendee());},
+                trailing: Icon(Icons.arrow_right),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+              child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
+            ),
+            Container(
+              height: 40.0,
+              child: ListTile(
+                horizontalTitleGap: 2.0,
+                title: Text('Info'),
+                leading: Icon(Icons.info_sharp),
+                onTap: (){Get.to(const InfoPage());},
+                trailing: Icon(Icons.arrow_right),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+              child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget buildListTile({required Widget leading, required Widget title}) {
-    return ListTile(
-      leading: leading,
-      title: title,
     );
   }
 }

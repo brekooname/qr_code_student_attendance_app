@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:barcode_scan2/barcode_scan2.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_student_attendance_app/screens/dashboard.dart';
+import 'package:qr_code_student_attendance_app/services/database_service.dart';
 
 class Scan extends StatefulWidget {
   const Scan({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class Scan extends StatefulWidget {
 
 class _ScanState extends State<Scan> {
   ScanResult? scanResult;
+  //int? isSuccessful;
 
   final _flashOnController = TextEditingController(text: 'Flash on');
   final _flashOffController = TextEditingController(text: 'Flash off');
@@ -261,6 +264,14 @@ class _ScanState extends State<Scan> {
       );
 
       setState(() => scanResult = result);
+
+      int i = await DatabaseService.instance.insert({
+        DatabaseService.colIndexNumber:
+            jsonDecode(scanResult!.rawContent)['id'],
+        DatabaseService.colName: jsonDecode(scanResult!.rawContent)['name'],
+        DatabaseService.colClass: jsonDecode(scanResult!.rawContent)['class']
+      });
+      print('The inserted id is $i');
       //print(jsonDecode(scanResult!.rawContent));
     } on PlatformException catch (e) {
       setState(() {
