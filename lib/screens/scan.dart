@@ -265,12 +265,14 @@ class _ScanState extends State<Scan> {
 
       setState(() => scanResult = result);
 
+      print(jsonDecode(scanResult!.rawContent));
       int i = await DatabaseService.instance.insert({
-        DatabaseService.colIndexNumber:
-            jsonDecode(scanResult!.rawContent)['id'],
+        DatabaseService.colIndexNumber: jsonDecode(scanResult!.rawContent)['indexNumber'],
         DatabaseService.colName: jsonDecode(scanResult!.rawContent)['name'],
-        DatabaseService.colClass: jsonDecode(scanResult!.rawContent)['class']
+        DatabaseService.colClass: jsonDecode(scanResult!.rawContent)['class'],
+        DatabaseService.colDateTime:DateTime.now().toString()
       });
+
       print('The inserted id is $i');
       //print(jsonDecode(scanResult!.rawContent));
     } on PlatformException catch (e) {

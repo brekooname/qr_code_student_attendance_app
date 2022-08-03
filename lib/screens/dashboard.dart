@@ -20,94 +20,96 @@ class _DashboardState extends State<Dashboard> {
         centerTitle: true,
         title: Text('Network Status'),
       ),
-      drawer: Drawer(
-        width: 200.0,
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              //decoration: BoxDecoration(
-                  //gradient:
-                      //LinearGradient(colors: [Colors.blue, Colors.white])),
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    Icon(
-                      Icons.qr_code_scanner_outlined,
-                      size: 100.0,
-                      color: Colors.white,
-                    ),
-                    Text('Q u i c k   A t t e n d a n c e', style: TextStyle(color: Colors.white),),
-                  ],
+      drawer: SafeArea(
+        child: Drawer(
+          width: 200.0,
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                //decoration: BoxDecoration(
+                    //gradient:
+                        //LinearGradient(colors: [Colors.blue, Colors.white])),
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.qr_code_scanner_outlined,
+                        size: 100.0,
+                        color: Colors.white,
+                      ),
+                      Text('Q u i c k   A t t e n d a n c e', style: TextStyle(color: Colors.white),),
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-             Container(
-               height: 40.0,
-               child: Padding(
-                 padding: const EdgeInsets.only(bottom: 15.0),
-                 child: InkWell(
-                   splashColor: Colors.blue,
-                   child: ListTile(
-                     horizontalTitleGap: 2.0,
-                     title: Text('Scan'),
-                     leading: Icon(Icons.qr_code_scanner),
-                     onTap: (){Get.to(const Scan());},
-                     trailing: Icon(Icons.arrow_right),
+               Container(
+                 height: 40.0,
+                 child: Padding(
+                   padding: const EdgeInsets.only(bottom: 15.0),
+                   child: InkWell(
+                     splashColor: Colors.blue,
+                     child: ListTile(
+                       horizontalTitleGap: 2.0,
+                       title: Text('Scan'),
+                       leading: Icon(Icons.qr_code_scanner),
+                       onTap: (){Get.to(const Scan());},
+                       trailing: Icon(Icons.arrow_right),
+                     ),
                    ),
                  ),
                ),
-             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
-              child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
-            ),
-            Container(
-              height: 40.0,
-              child: ListTile(
-                horizontalTitleGap: 2.0,
-                title: Text('Sync'),
-                leading: Icon(Icons.sync_outlined),
-                onTap: (){Get.to(const SyncData());},
-                trailing: Icon(Icons.arrow_right),
+              Padding(
+                padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+                child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
-              child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
-            ),
-            Container(
-              height: 40.0,
-              child: ListTile(
-                horizontalTitleGap: 2.0,
-                title: Text('Delete'),
-                leading: Icon(Icons.delete_forever),
-                onTap: (){Get.to(const DeleteAttendee());},
-                trailing: Icon(Icons.arrow_right),
+              Container(
+                height: 40.0,
+                child: ListTile(
+                  horizontalTitleGap: 2.0,
+                  title: Text('Sync'),
+                  leading: Icon(Icons.sync_outlined),
+                  onTap: (){Get.to(const SyncData());},
+                  trailing: Icon(Icons.arrow_right),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
-              child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
-            ),
-            Container(
-              height: 40.0,
-              child: ListTile(
-                horizontalTitleGap: 2.0,
-                title: Text('Info'),
-                leading: Icon(Icons.info_sharp),
-                onTap: (){Get.to(const InfoPage());},
-                trailing: Icon(Icons.arrow_right),
+              Padding(
+                padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+                child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
-              child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
-            ),
-          ],
+              Container(
+                height: 40.0,
+                child: ListTile(
+                  horizontalTitleGap: 2.0,
+                  title: Text('Delete'),
+                  leading: Icon(Icons.delete_forever),
+                  onTap: (){Get.to(const DeleteAttendee());},
+                  trailing: Icon(Icons.arrow_right),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+                child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
+              ),
+              Container(
+                height: 40.0,
+                child: ListTile(
+                  horizontalTitleGap: 2.0,
+                  title: Text('Info'),
+                  leading: Icon(Icons.info_sharp),
+                  onTap: (){Get.to(const InfoPage());},
+                  trailing: Icon(Icons.arrow_right),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+                child: Divider(thickness: 1.0, color: Colors.grey.shade300,),
+              ),
+            ],
+          ),
         ),
       ),
     );
