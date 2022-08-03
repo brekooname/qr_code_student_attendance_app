@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qr_code_student_attendance_app/screens/scan%20info.dart';
 import 'package:qr_code_student_attendance_app/screens/scan.dart';
-import 'package:qr_code_student_attendance_app/screens/settings.dart';
 import 'package:qr_code_student_attendance_app/screens/sync_data.dart';
 import 'package:qr_code_student_attendance_app/screens/view_data.dart';
 
@@ -56,19 +54,7 @@ class Dashboard extends StatelessWidget {
                     },
                     child: buildListTile(
                       leading: const Icon(Icons.qr_code_scanner_outlined),
-                      title: const Text('S c a n'),
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 1.0,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(const ScanInfo());
-                    },
-                    child: buildListTile(
-                      leading: const Icon(Icons.qr_code),
-                      title: const Text('V i e w  Info'),
+                      title: const Text('Scan'),
                     ),
                   ),
                   const Divider(
@@ -80,7 +66,7 @@ class Dashboard extends StatelessWidget {
                     },
                     child: buildListTile(
                       leading: const Icon(Icons.sync_outlined),
-                      title: const Text('S y n c   D a t a'),
+                      title: const Text('Sync Data'),
                     ),
                   ),
                   const Divider(
@@ -92,19 +78,7 @@ class Dashboard extends StatelessWidget {
                     },
                     child: buildListTile(
                       leading: const Icon(Icons.insert_drive_file_outlined),
-                      title: const Text('V i e w   D a t a'),
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 1.0,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(const Settings());
-                    },
-                    child: buildListTile(
-                      leading: const Icon(Icons.settings),
-                      title: const Text('S e t t i n g s'),
+                      title: const Text('View Data'),
                     ),
                   ),
                   const Divider(
